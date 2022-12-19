@@ -66,17 +66,17 @@ class Helper():
         nama = self.fullname
 
         status = 'member'
-        coin = f"0_{str(self.user_id)}"
+        dm = f"0_{str(self.user_id)}"
         if self.user_id == config.id_admin:
             status = 'owner'
-            coin = f"999999999999_{str(self.user_id)}"
+            dm = f"999999999999_{str(self.user_id)}"
 
         nama = await self.escapeHTML(nama)
         data = {
             '_id': self.user_id,
             'nama': nama,
             'status': f"{status}_{str(self.user_id)}",
-            'coin': coin,
+            'diamond': dm,
             'menfess': 0,
             'all_menfess': 0,
             'sign_up': self.get_time().full_time
