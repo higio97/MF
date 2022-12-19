@@ -48,15 +48,15 @@ class Database():
         mycol.delete_one({'_id': user_id})
         return
 
-    async def update_menfess(self, coin: int, menfess: int, all_menfess: int):
+    async def update_menfess(self, dm: int, menfess: int, all_menfess: int):
         user = self.get_data_pelanggan()
-        last_coin = user.coin
+        last_dm = user.dm
         last_menfess = user.menfess
         last_all_menfess = user.all_menfess
         mycol.update_one(
-            {"coin": f"{last_coin}_{str(user.id)}", "menfess": last_menfess, "all_menfess": last_all_menfess},
+            {"dm": f"{last_dm}_{str(user.id)}", "menfess": last_menfess, "all_menfess": last_all_menfess},
             {"$set": {
-                "coin": f"{coin}_{str(user.id)}",
+                "dm": f"{dm}_{str(user.id)}",
                 "menfess": (menfess + 1),
                 "all_menfess": (all_menfess + 1)}
             }
@@ -67,18 +67,18 @@ class Database():
         x = mycol.update_many({}, new)
         return x.modified_count
         
-    async def transfer_coin(self, ditranfer: int, diterima: int, coin_awal_target_full: int, id_target: int):
-        coin_awal_user = self.get_data_pelanggan().coin_full
+    async def transfer_dm(self, ditranfer: int, diterima: int, dm_awal_target_full: int, id_target: int):
+        dm_awal_user = self.get_data_pelanggan().dm_full
         a = mycol.update_one(
-            {"coin": coin_awal_user},
+            {"dm": dm_awal_user},
             {"$set": {
-                "coin": f"{ditranfer}_{self.user_id}"
+                "dm": f"{ditranfer}_{self.user_id}"
             }}
         )
         b = mycol.update_one(
-            {"coin": coin_awal_target_full},
+            {"dm": dm_awal_target_full},
             {"$set": {
-                "coin": f"{diterima}_{id_target}"
+                "dm": f"{diterima}_{id_target}"
             }}
         )
     async def update_admin(self, id_admin: int, id_bot: int):
@@ -89,12 +89,12 @@ class Database():
         data.append(id_admin)
 
         last_status = self.get_data_pelanggan().status_full
-        coin_awal = self.get_data_pelanggan().coin
+        dm_awal = self.get_data_pelanggan().dm
         mycol.update_one(
-            {"status": last_status, "coin": f"{coin_awal}_{str(id_admin)}"},
+            {"status": last_status, "dm": f"{dm_awal}_{str(id_admin)}"},
             {"$set": {
                 "status": f"admin_{str(id_admin)}",
-                "coin": f"{(coin_awal + 1000)}_{str(id_admin)}"
+                "dm": f"{(dm_awal + 1000)}_{str(id_admin)}"
             }
             })
         mycol.update_one(last_data, {"$set": {"admin": data}})
@@ -107,12 +107,12 @@ class Database():
         data.remove(id_admin)
 
         last_status = self.get_data_pelanggan().status_full
-        coin_awal = self.get_data_pelanggan().coin
+        dm_awal = self.get_data_pelanggan().dm
         mycol.update_one(
-            {"status": last_status, "coin": f"{coin_awal}_{str(id_admin)}"},
+            {"status": last_status, "dm": f"{dm_awal}_{str(id_admin)}"},
             {"$set": {
                 "status": f"member_{str(id_admin)}",
-                "coin": f"{(coin_awal - 1000)}_{str(id_admin)}"
+                "dm": f"{(dm_awal - 1000)}_{str(id_admin)}"
             }
             })
         mycol.update_one(last_data, {"$set": {"admin": data}})
@@ -173,17 +173,17 @@ class Database():
         )
         mycol.update_one(last_data, {"$set": {"talent": new_data}})
 
-    async def rate_talent(self, id_talent: str, id_bot: int, coin: int):
+    async def rate_talent(self, id_talent: str, id_bot: int, dm: int):
         last_data = {
             "talent": self.get_data_bot(id_bot).talent
         }
         new_data = self.get_data_bot(id_bot).talent
         new_data[id_talent].update({"rate": new_data[id_talent]['rate'] + 1})
 
-        last_coin = self.get_data_pelanggan().coin
+        last_dm = self.get_data_pelanggan().dm
         mycol.update_one(
-            {"coin": f"{last_coin}_{self.user_id}"},
-            {"$set": {"coin": f"{coin}_{self.user_id}"}}
+            {"dm": f"{last_dm}_{self.user_id}"},
+            {"$set": {"dm": f"{dm}_{self.user_id}"}}
         )
         mycol.update_one(last_data, {"$set": {"talent": new_data}})
 
@@ -217,17 +217,17 @@ class Database():
         )
         mycol.update_one(last_data, {"$set": {"daddy_sugar": new_data}})
 
-    async def rate_sugar_daddy(self, id_talent: str, id_bot: int, coin: int):
+    async def rate_sugar_daddy(self, id_talent: str, id_bot: int, dm: int):
         last_data = {
             "daddy_sugar": self.get_data_bot(id_bot).daddy_sugar
         }
         new_data = self.get_data_bot(id_bot).daddy_sugar
         new_data[id_talent].update({"rate": new_data[id_talent]['rate'] + 1})
 
-        last_coin = self.get_data_pelanggan().coin
+        last_dm = self.get_data_pelanggan().dm
         mycol.update_one(
-            {"coin": f"{last_coin}_{self.user_id}"},
-            {"$set": {"coin": f"{coin}_{self.user_id}"}}
+            {"dm": f"{last_dm}_{self.user_id}"},
+            {"$set": {"dm": f"{dm}_{self.user_id}"}}
         )
         mycol.update_one(last_data, {"$set": {"daddy_sugar": new_data}})
 
@@ -261,17 +261,17 @@ class Database():
         )
         mycol.update_one(last_data, {"$set": {"moansgirl": new_data}})
 
-    async def rate_moans_girl(self, id_talent: str, id_bot: int, coin: int):
+    async def rate_moans_girl(self, id_talent: str, id_bot: int, dm: int):
         last_data = {
             "moansgirl": self.get_data_bot(id_bot).moansgirl
         }
         new_data = self.get_data_bot(id_bot).moansgirl
         new_data[id_talent].update({"rate": new_data[id_talent]['rate'] + 1})
 
-        last_coin = self.get_data_pelanggan().coin
+        last_dm = self.get_data_pelanggan().dm
         mycol.update_one(
-            {"coin": f"{last_coin}_{self.user_id}"},
-            {"$set": {"coin": f"{coin}_{self.user_id}"}}
+            {"dm": f"{last_dm}_{self.user_id}"},
+            {"$set": {"dm": f"{dm}_{self.user_id}"}}
         )
         mycol.update_one(last_data, {"$set": {"moansgirl": new_data}})
     
@@ -305,17 +305,17 @@ class Database():
         )
         mycol.update_one(last_data, {"$set": {"moansboy": new_data}})
 
-    async def rate_moans_boy(self, id_talent: str, id_bot: int, coin: int):
+    async def rate_moans_boy(self, id_talent: str, id_bot: int, dm: int):
         last_data = {
             "moansboy": self.get_data_bot(id_bot).moansboy
         }
         new_data = self.get_data_bot(id_bot).moansboy
         new_data[id_talent].update({"rate": new_data[id_talent]['rate'] + 1})
 
-        last_coin = self.get_data_pelanggan().coin
+        last_dm = self.get_data_pelanggan().dm
         mycol.update_one(
-            {"coin": f"{last_coin}_{self.user_id}"},
-            {"$set": {"coin": f"{coin}_{self.user_id}"}}
+            {"dm": f"{last_dm}_{self.user_id}"},
+            {"$set": {"dm": f"{dm}_{self.user_id}"}}
         )
         mycol.update_one(last_data, {"$set": {"moansboy": new_data}})
 
@@ -349,17 +349,17 @@ class Database():
         )
         mycol.update_one(last_data, {"$set": {"gfrent": new_data}})
     
-    async def rate_gf_rent(self, id_talent: str, id_bot: int, coin: int):
+    async def rate_gf_rent(self, id_talent: str, id_bot: int, dm: int):
         last_data = {
             "gfrent": self.get_data_bot(id_bot).gfrent
         }
         new_data = self.get_data_bot(id_bot).gfrent
         new_data[id_talent].update({"rate": new_data[id_talent]['rate'] + 1})
 
-        last_coin = self.get_data_pelanggan().coin
+        last_dm = self.get_data_pelanggan().dm
         mycol.update_one(
-            {"coin": f"{last_coin}_{self.user_id}"},
-            {"$set": {"coin": f"{coin}_{self.user_id}"}}
+            {"dm": f"{last_dm}_{self.user_id}"},
+            {"$set": {"dm": f"{dm}_{self.user_id}"}}
         )
         mycol.update_one(last_data, {"$set": {"gfrent": new_data}})
     
@@ -393,17 +393,17 @@ class Database():
         )
         mycol.update_one(last_data, {"$set": {"bfrent": new_data}})
 
-    async def rate_bf_rent(self, id_talent: str, id_bot: int, coin: int):
+    async def rate_bf_rent(self, id_talent: str, id_bot: int, dm: int):
         last_data = {
             "bfrent": self.get_data_bot(id_bot).bfrent
         }
         new_data = self.get_data_bot(id_bot).bfrent
         new_data[id_talent].update({"rate": new_data[id_talent]['rate'] + 1})
 
-        last_coin = self.get_data_pelanggan().coin
+        last_dm = self.get_data_pelanggan().dm
         mycol.update_one(
-            {"coin": f"{last_coin}_{self.user_id}"},
-            {"$set": {"coin": f"{coin}_{self.user_id}"}}
+            {"dm": f"{last_dm}_{self.user_id}"},
+            {"$set": {"dm": f"{dm}_{self.user_id}"}}
         )
         mycol.update_one(last_data, {"$set": {"bfrent": new_data}})
     
@@ -522,8 +522,8 @@ class data_pelanggan():
         self.id = args['_id']
         self.nama = str(args['nama'])
         self.mention = f'<a href="tg://user?id={self.id}">{self.nama}</a>'
-        self.coin = int(args['coin'].split('_')[0])
-        self.coin_full = str(args['coin'])
+        self.dm = int(args['dm'].split('_')[0])
+        self.dm_full = str(args['dm'])
         self.status = str(args['status'].split('_')[0])
         self.status_full = str(args['status'])
         self.menfess = int(args['menfess'])
