@@ -14,17 +14,17 @@ async def broadcast_handler(client: Client, msg: Message):
         anu = msg.reply_to_message
         anu = await anu.copy(msg.chat.id, reply_to_message_id=anu.id)
         markup = InlineKeyboardMarkup([
-            [InlineKeyboardButton('Ya', 'ya_confirm'), InlineKeyboardButton('Tidak', 'tidak_confirm')]
+            [InlineKeyboardButton('Ya', 'Ya_Confirm'), InlineKeyboardButton('Tidak', 'Tidak_Confirm')]
         ])
-        await anu.reply('apakah kamu akan mengirimkan pesan broadcast ?', True, reply_markup=markup)
+        await anu.reply('Apakah Kamu Akan Mengirimkan Pesan Broadcast ?', True, reply_markup=markup)
     else:
-        await msg.reply('Harap reply sebuah pesan', True)
+        await msg.reply('Harap Reply Sebuah Pesan', True)
 
 async def broadcast_ya(client: Client, query: CallbackQuery):
     msg = query.message
     db = Database(msg.from_user.id)
     if not msg.reply_to_message:
-        await query.answer('Pesan tidak ditemukan', True)
+        await query.answer('Pesan Tidak Ditemukan', True)
         await query.message.delete()
         return
     message = msg.reply_to_message
@@ -34,7 +34,7 @@ async def broadcast_ya(client: Client, query: CallbackQuery):
     dihapus = 0
     blokir = 0
     gagal = 0
-    await msg.edit('Broadcast sedang berlangsung, tunggu sebentar', reply_markup = None)
+    await msg.edit('Broadcast Sedang Berlangsung, Tunggu Sebentar', reply_markup = None)
     for user_id in user_ids:
         try:
             await message.copy(user_id)
@@ -50,13 +50,13 @@ async def broadcast_ya(client: Client, query: CallbackQuery):
         except InputUserDeactivated:
             dihapus += 1
             await db.hapus_pelanggan(user_id)
-    text = f"""<b>Broadcast selesai</b>
+    text = f"""<b>Broadcast Selesai</b>
     
 Jumlah pengguna: {str(len(user_ids))}
-Berhasil terkirim: {str(berhasil)}
-Pengguna diblokir: {str(blokir)}
-Akun yang dihapus: {str(dihapus)} (<i>Telah dihapus dari database</i>)
-Gagal terkirim: {str(gagal)}"""
+Berhasil Terkirim: {str(berhasil)}
+Pengguna Diblokir: {str(blokir)}
+Akun Yang Dihapus: {str(dihapus)} (<i>Telah Dihapus Dari Database</i>)
+Gagal Terkirim: {str(gagal)}"""
 
     await msg.reply(text)
     await msg.delete()
