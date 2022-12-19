@@ -31,9 +31,9 @@ async def status_handler(client: Client, msg: types.Message):
     pesan += f'├Nama : {db.mention}\n'
     pesan += f'└Status : {db.status}\n\n'
     pesan += '<b>📝Lainnya</b>\n'
-    pesan += f'├Coin : {helper.formatrupiah(db.coin)}💰\n'
-    pesan += f'├MenFess : {db.menfess}/{config.batas_kirim}\n'
-    pesan += f'├Semua MenFess : {db.all_menfess}\n'
+    pesan += f'├Diamond : {helper.formatrupiah(db.dm)}💎\n'
+    pesan += f'├Pesan : {db.menfess}/{config.batas_kirim}\n'
+    pesan += f'├Semua Pesan : {db.all_menfess}\n'
     pesan += f'└Bergabung : {db.sign_up}'
     await msg.reply(pesan, True, enums.ParseMode.HTML)
 
