@@ -92,7 +92,7 @@ async def on_message(client: Client, msg: Message):
                 return await rate_talent_handler(client, msg)
             
             elif re.search(r"^[\/]tf_dm", command):
-                return await transfer_coin_handler(client, msg)
+                return await transfer_dm_handler(client, msg)
 
             elif re.search(r"^[\/]bot", command): # menonaktifkan dan mengaktifkan bot
                 if uid == config.id_admin:
