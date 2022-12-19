@@ -35,7 +35,7 @@ async def on_message(client: Client, msg: Message):
             ]
             member = database.get_data_pelanggan()
             if member.status in status:
-                return await client.send_message(uid, "<i>Saat ini bot sedang dinonaktifkan</i>", enums.ParseMode.HTML)
+                return await client.send_message(uid, "<i>Saat ini Bot Sedang Dinonaktifkan</i>", enums.ParseMode.HTML)
 
         # anu = msg.caption if not msg.text else msg.text
         # print(f"-> {anu}")
@@ -194,15 +194,15 @@ async def on_message(client: Client, msg: Message):
                 hastag = config.hastag.split('|')
                 member = database.get_data_pelanggan()
                 if member.status == 'banned':
-                    return await msg.reply(f'Kamu telah <b>di banned</b>\n\n<u>Alasan:</u> {database.get_data_bot(client.id_bot).ban[str(uid)]}\nsilahkan kontak admin di grup @anonymousmyboo untuk unbanned', True, enums.ParseMode.HTML)
+                    return await msg.reply(f'Kamu Telah <b>Di Banned</b>\n\n<u>Alasan:</u> {database.get_data_bot(client.id_bot).ban[str(uid)]}\nSilahkan Kontak Admin Di Grup @AlterFWBGrup Untuk Unbanned', True, enums.ParseMode.HTML)
                 if key in [hastag[0], hastag [1]]:
                     if key == command.lower() or len(command.split(' ')) < 3:
-                        return await msg.reply('🙅🏻‍♀️  post gagal terkirim, <b>mengirim pesan wajib lebih dari 3 kata.</b>', True, enums.ParseMode.HTML)
+                        return await msg.reply('🙅🏻‍♀️  Post Gagal Terkirim, <b>Mengirim Pesan Wajib Lebih Dari 3 Kata.</b>', True, enums.ParseMode.HTML)
                     else:
                         return await send_with_pic_handler(client, msg, key, hastag)
                 elif key in hastag:
                     if key == command.lower() or len(command.split(' ')) < 3:
-                        return await msg.reply('🙅🏻‍♀️  post gagal terkirim, <b>mengirim pesan wajib lebih dari 3 kata.</b>', True, enums.ParseMode.HTML)
+                        return await msg.reply('🙅🏻‍♀️  Post Gagal Terkirim, <b>Mengirim Pesan Wajib Lebih Dari 3 Kata.</b>', True, enums.ParseMode.HTML)
                     else:
                         return await send_menfess_handler(client, msg)
                 else:
@@ -248,10 +248,10 @@ async def on_callback_query(client: Client, query: CallbackQuery):
             if query.message.chat.id == config.id_admin:
                 await status_handler_inline(client, query)
             else:
-                await query.answer('Ditolak, kamu tidak ada akses', True)
-        elif query.data == 'ya_confirm':
+                await query.answer('Ditolak, Kamu Tidak Ada Akses', True)
+        elif query.data == 'Ya_Confirm':
             await broadcast_ya(client, query)
-        elif query.data == 'tidak_confirm':
+        elif query.data == 'Tidak_Confirm':
             await close_cbb(client, query)
     except:
         pass
