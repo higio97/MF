@@ -91,7 +91,7 @@ async def on_message(client: Client, msg: Message):
             elif re.search(r"^[\/]rate", command):
                 return await rate_talent_handler(client, msg)
             
-            elif re.search(r"^[\/]tf_coin", command):
+            elif re.search(r"^[\/]tf_dm", command):
                 return await transfer_coin_handler(client, msg)
 
             elif re.search(r"^[\/]bot", command): # menonaktifkan dan mengaktifkan bot
@@ -153,13 +153,13 @@ async def on_message(client: Client, msg: Message):
                     try:
                         tipe = await client.get_chat(y.group(1))
                         if tipe.type == enums.ChatType.BOT:
-                            return await msg.reply('Terdeteksi username bot tidak dapat mengirim menfess')
+                            return await msg.reply('🙅🏻‍♀️ Terdeteksi Username Bot Tidak Dapat Mengirim Pesan')
                         elif tipe.type == enums.ChatType.CHANNEL:
-                            return await msg.reply('Terdeteksi username channel/grup tidak dapat mengirim menfess')
+                            return await msg.reply('🙅🏻‍♀️ Terdeteksi Username Channel/Grup Tidak Dapat Mengirim Pesan')
                         elif tipe.type == enums.ChatType.SUPERGROUP:
-                            return await msg.reply('Terdeteksi username channel/grup tidak dapat mengirim menfess')
+                            return await msg.reply('🙅🏻‍♀️ Terdeteksi Username Channel/Grup Tidak Dapat Mengirim Pesan')
                         elif tipe.type == enums.ChatType.GROUP:
-                            return await msg.reply('Terdeteksi username channel/grup tidak dapat mengirim menfess')
+                            return await msg.reply('🙅🏻‍♀️ Terdeteksi Username Channel/Grup Tidak Dapat Mengirim Pesan')
                     except:
                         pass
                 z = re.search(r"(?:^|\s)(t\.me|telegram\.me)\/([-a-zA-Z0-9@:%._\+~#=]{1,256})", command.lower())
@@ -167,29 +167,29 @@ async def on_message(client: Client, msg: Message):
                     try:
                         tipe = await client.get_chat(z.group(2))
                         if tipe.type == enums.ChatType.BOT:
-                            return await msg.reply('Terdeteksi username bot tidak dapat mengirim menfess')
+                            return await msg.reply('🙅🏻‍♀️ Terdeteksi Username Bot Tidak Dapat Mengirim Pesan')
                         elif tipe.type == enums.ChatType.CHANNEL:
-                            return await msg.reply('Terdeteksi username channel/grup tidak dapat mengirim menfess')
+                            return await msg.reply('🙅🏻‍♀️ Terdeteksi Username Channel/Grup Tidak Dapat Mengirim Pesan')
                         elif tipe.type == enums.ChatType.SUPERGROUP:
-                            return await msg.reply('Terdeteksi username channel/grup tidak dapat mengirim menfess')
+                            return await msg.reply('🙅🏻‍♀️ Terdeteksi Username Channel/Grup Tidak Dapat Mengirim Pesan')
                         elif tipe.type == enums.ChatType.GROUP:
-                            return await msg.reply('Terdeteksi username channel/grup tidak dapat mengirim menfess')
+                            return await msg.reply('🙅🏻‍♀️ Terdeteksi Username Channel/Grup Tidak Dapat Mengirim Pesan')
                     except:
-                        return await msg.reply('Terdeteksi link channel/grup/tautan tidak dapat mengirim menfess')
+                        return await msg.reply('Terdeteksi Link Channel/Grup/Tautan Tidak Dapat Mengirim Pesan')
                 u = re.search(r"(?:^|\s)https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b\/([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)", command.lower())
                 if u:
                     try:
                         tipe = await client.get_chat(u.group(2))
                         if tipe.type == enums.ChatType.BOT:
-                            return await msg.reply('Terdeteksi link bot tidak dapat mengirim menfess')
+                            return await msg.reply('🙅🏻‍♀️ Terdeteksi Link Bot Tidak Dapat Mengirim Pesan')
                         elif tipe.type == enums.ChatType.CHANNEL:
-                            return await msg.reply('Terdeteksi link channel/grup tidak dapat mengirim menfess')
+                            return await msg.reply('🙅🏻‍♀️ Terdeteksi Link Channel/Grup Tidak Dapat Mengirim Pesan')
                         elif tipe.type == enums.ChatType.SUPERGROUP:
-                            return await msg.reply('Terdeteksi link channel/grup tidak dapat mengirim menfess')
+                            return await msg.reply('🙅🏻‍♀️ Terdeteksi Link Channel/Grup Tidak Dapat Mengirim Pesan')
                         elif tipe.type == enums.ChatType.GROUP:
-                            return await msg.reply('Terdeteksi link channel/grup tidak dapat mengirim menfess')
+                            return await msg.reply('🙅🏻‍♀️ Terdeteksi Link Channel/Grup Tidak Dapat Mengirim Pesan')
                     except:
-                        return await msg.reply('Terdeteksi link channel/grup/tautan tidak dapat mengirim menfess')
+                        return await msg.reply('🙅🏻‍♀️ Terdeteksi Link Channel/Grup/Tautan Tidak Dapat Mengirim Pesan')
                 key = x.group(1)
                 hastag = config.hastag.split('|')
                 member = database.get_data_pelanggan()
@@ -248,7 +248,7 @@ async def on_callback_query(client: Client, query: CallbackQuery):
             if query.message.chat.id == config.id_admin:
                 await status_handler_inline(client, query)
             else:
-                await query.answer('Ditolak, Kamu Tidak Ada Akses', True)
+                await query.answer('🙅🏻‍♀️ Ditolak, Kamu Tidak Ada Akses', True)
         elif query.data == 'Ya_Confirm':
             await broadcast_ya(client, query)
         elif query.data == 'Tidak_Confirm':
