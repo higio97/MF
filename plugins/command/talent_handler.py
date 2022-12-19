@@ -232,49 +232,49 @@ async def rate_talent_handler(client: Client, msg: types.Message):
         db = Database(msg.from_user.id)
         user = db.get_data_pelanggan()
         db_bot = db.get_data_bot(client.id_bot)
-        my_coin = user.coin
+        my_dm = user.dm
         if msg.from_user.id == int(target):
             return await msg.reply('tidak dapat memberi rating kepada diri sendiri', True)
         
         if target in db_bot.talent:
-            if my_coin <= config.biaya_talent:
-                return await msg.reply(f'coin kamu kurang untuk memberikan rating ke talent fwb. biaya rate adalah {str(config.biaya_talent)} coin', True)  
-            to_talent = my_coin - config.biaya_talent
+            if my_dm <= config.biaya_talent:
+                return await msg.reply(f'Diamond Kamu Kurang Untuk Memberikan Rating ke Talent FWB. Biaya Rate adalah {str(config.biaya_talent)} Diamond', True)  
+            to_talent = my_dm - config.biaya_talent
             await db.rate_talent(target, client.id_bot, to_talent)
-            return await msg.reply(f'kamu berhasil memberikan 1 🍓 kepada {target}', True)
+            return await msg.reply(f'kamu Berhasil Memberikan 1 🍓 Kepada {target}', True)
         
         elif target in db_bot.daddy_sugar:
-            if my_coin <= config.biaya_daddy_sugar:
-                return await msg.reply(f'coin kamu kurang untuk memberikan rating ke talent fwb. biaya rate adalah {str(config.biaya_daddy_sugar)} coin', True)
-            to_talent = my_coin - config.biaya_daddy_sugar
+            if my_dm <= config.biaya_daddy_sugar:
+                return await msg.reply(f'Diamond Kamu Kurang Untuk Memberikan Rating ke Talent FWB. Biaya Rate adalah {str(config.biaya_daddy_sugar)} Diamond', True)
+            to_talent = my_dm - config.biaya_daddy_sugar
             await db.rate_sugar_daddy(target, client.id_bot, to_talent)
             return await msg.reply(f'kamu berhasil memberikan 1 🥂 kepada {target}', True)
         
         elif target in db_bot.moansgirl:
-            if my_coin <= config.biaya_moansgirl:
-                return await msg.reply(f'coin kamu kurang untuk memberikan rating ke talent fwb. biaya rate adalah {str(config.biaya_moansgirl)} coin', True)
-            to_talent = my_coin - config.biaya_moansgirl
+            if my_dm <= config.biaya_moansgirl:
+                return await msg.reply(f'Diamond Kamu Kurang Untuk Memberikan Rating ke Talent FWB. Biaya Rate adalah {str(config.biaya_moansgirl)} Diamond', True)
+            to_talent = my_dm - config.biaya_moansgirl
             await db.rate_moans_girl(target, client.id_bot, to_talent)
             return await msg.reply(f'kamu berhasil memberikan 1 🍬 kepada {target}', True)
         
         elif target in db_bot.moansboy:
-            if my_coin <= config.biaya_moansboy:
-                return await msg.reply(f'coin kamu kurang untuk memberikan rating ke talent fwb. biaya rate adalah {str(config.biaya_moansboy)} coin', True)
-            to_talent = my_coin - config.biaya_moansboy
+            if my_dm <= config.biaya_moansboy:
+                return await msg.reply(f'Diamond Kamu Kurang Untuk Memberikan Rating ke Talent FWB. Biaya Rate adalah {str(config.biaya_moansboy)} Diamond', True)
+            to_talent = my_dm - config.biaya_moansboy
             await db.rate_moans_boy(target, client.id_bot, to_talent)
             return await msg.reply(f'kamu berhasil memberikan 1 🍥 kepada {target}', True)
         
         elif target in db_bot.gfrent:
-            if my_coin <= config.biaya_gfrent:
-                return await msg.reply(f'coin kamu kurang untuk memberikan rating ke talent fwb. biaya rate adalah {str(config.biaya_gfrent)} coin', True)
-            to_talent = my_coin - config.biaya_gfrent
+            if my_dm <= config.biaya_gfrent:
+                return await msg.reply(f'Diamond Kamu Kurang Untuk Memberikan Rating ke Talent FWB. Biaya Rate adalah {str(config.biaya_gfrent)} Diamond', True)
+            to_talent = my_dm - config.biaya_gfrent
             await db.rate_gf_rent(target, client.id_bot, to_talent)
             return await msg.reply(f'kamu berhasil memberikan 1 🌸 kepada {target}', True)
         
         elif target in db_bot.bfrent:
-            if my_coin <= config.biaya_bfrent:
-                return await msg.reply(f'coin kamu kurang untuk memberikan rating ke talent fwb. biaya rate adalah {str(config.biaya_bfrent)} coin', True)
-            to_talent = my_coin - config.biaya_bfrent
+            if my_dm <= config.biaya_bfrent:
+                return await msg.reply(f'Diamond Kamu Kurang Untuk Memberikan Rating ke Talent FWB. Biaya Rate adalah {str(config.biaya_bfrent)} Diamond', True)
+            to_talent = my_dm - config.biaya_bfrent
             await db.rate_bf_rent(target, client.id_bot, to_talent)
             return await msg.reply(f'kamu berhasil memberikan 1 👓 kepada {target}', True)
         
