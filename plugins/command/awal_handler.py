@@ -8,7 +8,7 @@ async def start_handler(client: Client, msg: types.Message):
     first = msg.from_user.first_name
     last = msg.from_user.last_name
     fullname = first if not last else first + ' ' + last
-    username = '@chatjomblohalu_bot' if not msg.from_user.username else '@' + msg.from_user.username
+    username = '@AlterFWBBot' if not msg.from_user.username else '@' + msg.from_user.username
     mention = msg.from_user.mention
     await msg.reply_text(
         text = config.start_msg.format(
@@ -26,14 +26,14 @@ async def start_handler(client: Client, msg: types.Message):
 async def status_handler(client: Client, msg: types.Message):
     helper = Helper(client, msg)
     db = Database(msg.from_user.id).get_data_pelanggan()
-    pesan = '<b>🏷Info user</b>\n'
+    pesan = '<b>🏷Info User</b>\n'
     pesan += f'├ID : <code>{db.id}</code>\n'
     pesan += f'├Nama : {db.mention}\n'
     pesan += f'└Status : {db.status}\n\n'
     pesan += '<b>📝Lainnya</b>\n'
     pesan += f'├Coin : {helper.formatrupiah(db.coin)}💰\n'
-    pesan += f'├Menfess : {db.menfess}/{config.batas_kirim}\n'
-    pesan += f'├Semua Menfess : {db.all_menfess}\n'
+    pesan += f'├MenFess : {db.menfess}/{config.batas_kirim}\n'
+    pesan += f'├Semua MenFess : {db.all_menfess}\n'
     pesan += f'└Bergabung : {db.sign_up}'
     await msg.reply(pesan, True, enums.ParseMode.HTML)
 
@@ -68,9 +68,9 @@ async def list_admin_handler(helper: Helper, id_bot: int):
 async def list_ban_handler(helper: Helper, id_bot: int):
     db = Database(helper.user_id).get_data_bot(id_bot)
     if len(db.ban) == 0:
-        return await helper.message.reply_text('<i>Tidak ada user dibanned saat ini</i>', True, enums.ParseMode.HTML)
+        return await helper.message.reply_text('<i>Tidak Ada User Dibanned Saat Ini</i>', True, enums.ParseMode.HTML)
     else:
-        pesan = "<b>Daftar banned</b>\n"
+        pesan = "<b>Daftar Banned</b>\n"
         ind = 1
         for i in db.ban:
             pesan += "• ID: " + str(i) + " | <a href='tg://openmessage?user_id=" + str(i) + "'>( " + str(ind) + " )</a>\n"
@@ -82,7 +82,7 @@ async def gagal_kirim_handler(client: Client, msg: types.Message):
     first_name = msg.from_user.first_name
     last_name = msg.from_user.last_name
     fullname = first_name if not last_name else first_name + ' ' + last_name
-    username = '@chatjomblohalu_bot' if not msg.from_user.username else '@' + msg.from_user.username
+    username = '@AlterFWBBot' if not msg.from_user.username else '@' + msg.from_user.username
     mention = msg.from_user.mention
     return await msg.reply(config.gagalkirim_msg.format(
         id = msg.from_user.id,
@@ -96,40 +96,40 @@ async def gagal_kirim_handler(client: Client, msg: types.Message):
 async def help_handler(client, msg):
     db = Database(msg.from_user.id)
     member = db.get_data_pelanggan()
-    pesan = "Supported commands\n"
-    pesan += '/status — melihat status\n'
-    pesan += '/talent — melihat talent\n'
+    pesan = "Supported Commands\n"
+    pesan += '/status — Melihat Status\n'
+    pesan += '/talent — Melihat Talent\n'
     if member.status == 'admin':
         pesan += '\nHanya Admin\n'
-        pesan += '/tf_coin — transfer coin\n'
-        pesan += '/settings — melihat settingan bot\n'
-        pesan += '/list_admin — melihat list admin\n'
-        pesan += '/list_ban — melihat list banned\n\n'
-        pesan += 'Perintah banned\n'
-        pesan += '/ban — ban user\n'
-        pesan += '/unban — unban user\n'
+        pesan += '/tf_dm — Transfer Diamond\n'
+        pesan += '/settings — Melihat Settingan Bot\n'
+        pesan += '/list_admin — Melihat List Admin\n'
+        pesan += '/list_ban — Melihat List Banned\n\n'
+        pesan += 'Perintah Banned\n'
+        pesan += '/ban — Ban User\n'
+        pesan += '/unban — Unban User\n'
     if member.status == 'owner':
         pesan += '\n=====OWNER COMMAND=====\n'
-        pesan += '/tf_coin — transfer coin\n'
-        pesan += '/settings — melihat settingan bot\n'
-        pesan += '/list_admin — melihat list admin\n'
-        pesan += '/list_ban — melihat list banned\n'
-        pesan += '/stats — melihat statistik bot\n'
+        pesan += '/tf_dm — Transfer Diamond\n'
+        pesan += '/settings — Melihat Settingan Bot\n'
+        pesan += '/list_admin — Melihat List Admin\n'
+        pesan += '/list_ban — Melihat List Banned\n'
+        pesan += '/stats — Melihat Statistik Bot\n'
         pesan += '/bot — setbot (on|off)\n'
         pesan += '\n=====FITUR TALENT=====\n'
-        pesan += '/addtalent — menambahkan talent baru\n'
-        pesan += '/addsugar — menambahkan talent daddy sugar\n'
-        pesan += '/addgirl — menambahkan talent moans girl\n'
-        pesan += '/addboy — menambahkan talent moans boy\n'
-        pesan += '/addgf — menambahkan talent girlfriend rent\n'
-        pesan += '/addbf — menambahkan talent boyfriend rent\n'
-        pesan += '/hapus — menghapus talent\n'
+        pesan += '/addtalent — Menambahkan Talent Baru\n'
+        pesan += '/addsugar — Menambahkan Talent Daddy Sugar\n'
+        pesan += '/addgirl — Menambahkan Talent Moans Girl\n'
+        pesan += '/addboy — Menambahkan Talent Moans Boy\n'
+        pesan += '/addgf — Menambahkan Talent Girlfriend Rent\n'
+        pesan += '/addbf — Menambahkan Talent Boyfriend Rent\n'
+        pesan += '/hapus — Menghapus Talent\n'
         pesan += '\n=====BROADCAST OWNER=====\n'
-        pesan += '/broadcast — mengirim pesan broadcast kesemua user\n'
-        pesan += '/admin — menambahkan admin baru\n'
-        pesan += '/unadmin — menghapus admin\n'
-        pesan += '/list_ban — melihat list banned\n'
+        pesan += '/broadcast — mengirim Pesan Broadcast Kesemua User\n'
+        pesan += '/admin — Menambahkan Admin Baru\n'
+        pesan += '/unadmin — Menghapus Admin\n'
+        pesan += '/list_ban — Melihat List Banned\n'
         pesan += '\n=====BANNED COMMAND=====\n'
-        pesan += '/ban — ban user\n'
-        pesan += '/unban — unban user\n'
+        pesan += '/ban — Ban User\n'
+        pesan += '/unban — Unban User\n'
     await msg.reply(pesan, True)
